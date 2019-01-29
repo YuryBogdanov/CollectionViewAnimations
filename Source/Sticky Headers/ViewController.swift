@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 
     // MARK: Initialization
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.colors = {
             var colorsBySection: [[UIColor]] = []
 
@@ -27,7 +27,7 @@ class ViewController: UIViewController {
                 var colors: [UIColor] = []
 
                 for _ in 0...Number.random(from: 2, to: 10) {
-                    colors.append(UIColor.randomColor())
+                    colors.append(UIColor.random)
                 }
                 
                 colorsBySection.append(colors)
@@ -49,8 +49,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         collectionView = {
-            let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
-            collectionView.backgroundColor = UIColor.whiteColor()
+            let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+            collectionView.backgroundColor = UIColor.white
 
             collectionView.dataSource = self
             collectionView.delegate = self
@@ -100,7 +100,7 @@ extension ViewController: UICollectionViewDataSource {
         return colors[section].count
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
             ContentCell.reuseIdentifier,
             forIndexPath: indexPath
@@ -117,7 +117,7 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(
         collectionView: UICollectionView,
         viewForSupplementaryElementOfKind kind: String,
-        atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView
+        atIndexPath indexPath: IndexPath) -> UICollectionReusableView
     {
         let cell = collectionView.dequeueReusableSupplementaryViewOfKind(
             SectionHeaderCell.kind,
@@ -134,7 +134,7 @@ extension ViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 
 extension ViewController: UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
         layout.selectedCellIndexPath = layout.selectedCellIndexPath == indexPath ? nil : indexPath
 
         let bounceEnabled = false

@@ -14,16 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - App State Methods
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func applicationDidFinishLaunching(_ application: UIApplication) {
         window = {
-            let window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            let window = UIWindow(frame: UIScreen.main.bounds)
             window.rootViewController = ViewController()
-            window.backgroundColor = UIColor.whiteColor()
+            window.backgroundColor = UIColor.white
             window.makeKeyAndVisible()
-
+            
             return window
         }()
-
-        return true
     }
 }

@@ -29,8 +29,8 @@ class Layout: UICollectionViewLayout {
 
     let sectionHeaderHeight: CGFloat = 40
 
-    var contentSize = CGSizeZero
-    var selectedCellIndexPath: NSIndexPath?
+    var contentSize = CGSize.zero
+    var selectedCellIndexPath: IndexPath?
 
     // MARK: - Preparation
 
@@ -48,7 +48,7 @@ class Layout: UICollectionViewLayout {
 
         previousAttributes = currentAttributes
 
-        contentSize = CGSizeZero
+        contentSize = .zero
         currentAttributes = []
         currentSectionLimits = []
 
@@ -66,7 +66,7 @@ class Layout: UICollectionViewLayout {
             var attributesList: [UICollectionViewLayoutAttributes] = []
 
             for itemIndex in 0..<itemCount {
-                let indexPath = NSIndexPath(forItem: itemIndex, inSection: sectionIndex)
+                let indexPath = IndexPath(forItem: itemIndex, inSection: sectionIndex)
                 let attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
                 let size = CGSize(
                     width: width,
@@ -109,7 +109,7 @@ class Layout: UICollectionViewLayout {
 
             //================= Add Section Header Attributes =================
 
-            let indexPath = NSIndexPath(forItem: 0, inSection: sectionIndex)
+            let indexPath = IndexPath(forItem: 0, inSection: sectionIndex)
 
             let attributes = UICollectionViewLayoutAttributes(
                 forSupplementaryViewOfKind: SectionHeaderCell.kind,
@@ -135,15 +135,15 @@ class Layout: UICollectionViewLayout {
 
     // MARK: - Layout Attributes - Content Cell
 
-    override func initialLayoutAttributesForAppearingItemAtIndexPath(itemIndexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+    override func initialLayoutAttributesForAppearingItemAtIndexPath(itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return previousAttributes[itemIndexPath.section][itemIndexPath.item]
     }
 
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+    override func layoutAttributesForItemAtIndexPath(indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return currentAttributes[indexPath.section][indexPath.item]
     }
 
-    override func finalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+    override func finalLayoutAttributesForDisappearingItemAtIndexPath(itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return layoutAttributesForItemAtIndexPath(itemIndexPath)
     }
 
@@ -169,7 +169,7 @@ class Layout: UICollectionViewLayout {
 
     override func initialLayoutAttributesForAppearingSupplementaryElementOfKind(
         elementKind: String,
-        atIndexPath elementIndexPath: NSIndexPath)
+        atIndexPath elementIndexPath: IndexPath)
         -> UICollectionViewLayoutAttributes?
     {
         return previousSectionAttributes[elementIndexPath.section]
@@ -177,7 +177,7 @@ class Layout: UICollectionViewLayout {
 
     override func layoutAttributesForSupplementaryViewOfKind(
         elementKind: String,
-        atIndexPath indexPath: NSIndexPath)
+        atIndexPath indexPath: IndexPath)
         -> UICollectionViewLayoutAttributes?
     {
         return currentSectionAttributes[indexPath.section]
@@ -185,7 +185,7 @@ class Layout: UICollectionViewLayout {
 
     override func finalLayoutAttributesForDisappearingSupplementaryElementOfKind(
         elementKind: String,
-        atIndexPath elementIndexPath: NSIndexPath)
+        atIndexPath elementIndexPath: IndexPath)
         -> UICollectionViewLayoutAttributes?
     {
         return layoutAttributesForSupplementaryViewOfKind(elementKind, atIndexPath: elementIndexPath)
@@ -229,10 +229,10 @@ class Layout: UICollectionViewLayout {
         if invalidationContext.invalidateSectionHeaders {
             prepareSectionHeaderAttributes()
 
-            var sectionHeaderIndexPaths: [NSIndexPath] = []
+            var sectionHeaderIndexPaths: [IndexPath] = []
 
             for sectionIndex in 0..<currentSectionAttributes.count {
-                sectionHeaderIndexPaths.append(NSIndexPath(forItem: 0, inSection: sectionIndex))
+                sectionHeaderIndexPaths.append(IndexPath(forItem: 0, inSection: sectionIndex))
             }
 
             invalidationContext.invalidateSupplementaryElementsOfKind(

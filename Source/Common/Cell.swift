@@ -21,15 +21,15 @@ class ContentCell: UICollectionViewCell {
 
         label = {
             let label = UILabel()
-            label.font = UIFont.systemFontOfSize(20)
-            label.textColor = UIColor.whiteColor()
+            label.font = UIFont.systemFont(ofSize: 20)
+            label.textColor = UIColor.white
 
             return label
         }()
 
         contentView.addSubview(label)
 
-        label.snp_makeConstraints { make in
+        label.snp.makeConstraints { make in
             make.center.equalTo(contentView)
         }
     }
@@ -40,17 +40,46 @@ class ContentCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         UIView.performWithoutAnimation {
-            self.backgroundColor = nil
+            self.contentView.backgroundColor = nil
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if contentView.layer.mask == nil {
+            let maskLayer = CAShapeLayer()
+            maskLayer.path = UIBezierPath.pathForOutgoingMessage(rect: contentView.bounds).cgPath
+            contentView.layer.mask = maskLayer
+        } else if let maskLayer = contentView.layer.mask as? CAShapeLayer {
+            guard maskLayer.bounds != bounds else { return }
+//            CATransaction.begin()
+//            CATransaction.setAnimationDuration(0.17)
+//            maskLayer.bounds = CGRect(x: -bounds.width / 2, y: -bounds.height / 2, width: bounds.width, height: bounds.height)
+//            CATransaction.commit()
+            let newBounds = CGRect(x: -bounds.width / 2, y: -bounds.height / 2, width: bounds.width, height: bounds.height)
+            let animation = CABasicAnimation(keyPath: "bounds.size")
+            animation.duration = 0.17
+            animation.fromValue = maskLayer.bounds
+            animation.toValue = newBounds
+            maskLayer.add(animation, forKey: "bounds")
+            CATransaction.begin()
+            maskLayer.bounds = newBounds
+            CATransaction.commit()
         }
     }
 
     // MARK: Layout
 
-    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
-        super.applyLayoutAttributes(layoutAttributes)
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
         layoutIfNeeded()
     }
 }
+
+
+
+
 
 // MARK: -
 
@@ -69,15 +98,15 @@ class SectionHeaderCell: UICollectionReusableView {
 
         label = {
             let label = UILabel()
-            label.font = UIFont.boldSystemFontOfSize(14)
-            label.textColor = UIColor.whiteColor()
+            label.font = UIFont.boldSystemFont(ofSize: 14)
+            label.textColor = UIColor.white
 
             return label
         }()
 
         addSubview(label)
 
-        label.snp_makeConstraints { make in
+        label.snp.makeConstraints { make in
             make.leading.equalTo(self).offset(20)
             make.trailing.equalTo(self).offset(-20)
             make.centerY.equalTo(self)
@@ -90,8 +119,8 @@ class SectionHeaderCell: UICollectionReusableView {
 
     // MARK: Layout
 
-    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
-        super.applyLayoutAttributes(layoutAttributes)
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
         layoutIfNeeded()
     }
 }
