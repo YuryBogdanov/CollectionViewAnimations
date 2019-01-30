@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		151363872201715700EAC5F3 /* MessagePointerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151363862201715700EAC5F3 /* MessagePointerView.swift */; };
 		23DF0B0752CFA963087E0C0A /* Pods_Sticky_Headers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D6E1670ACC68628D04E8569 /* Pods_Sticky_Headers.framework */; };
 		4C61C6F41C13C03C00205047 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C61C6F21C13C03C00205047 /* Layout.swift */; };
 		4C61C6F51C13C03C00205047 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C61C6F31C13C03C00205047 /* ViewController.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		151363862201715700EAC5F3 /* MessagePointerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagePointerView.swift; sourceTree = "<group>"; };
 		4C61C6F21C13C03C00205047 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		4C61C6F31C13C03C00205047 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4C61C6F91C14BAFD00205047 /* InvalidationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidationContext.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				4CAAD8B51C13BB8E004ADF5C /* AppDelegate.swift */,
 				4CAAD8B91C13BB8E004ADF5C /* Cell.swift */,
+				151363862201715700EAC5F3 /* MessagePointerView.swift */,
 				4CAAD8BA1C13BB8E004ADF5C /* Number.swift */,
 				4CAAD8BB1C13BB8E004ADF5C /* UIColor+CVA.swift */,
 				4CAAD8CD1C13BBB8004ADF5C /* Support */,
@@ -365,6 +368,7 @@
 				4CAAD8E71C13BC09004ADF5C /* Number.swift in Sources */,
 				4CAAD8E81C13BC09004ADF5C /* AppDelegate.swift in Sources */,
 				4C61C6F51C13C03C00205047 /* ViewController.swift in Sources */,
+				151363872201715700EAC5F3 /* MessagePointerView.swift in Sources */,
 				4CAAD8EA1C13BC09004ADF5C /* UIColor+CVA.swift in Sources */,
 				4CAAD8EB1C13BC09004ADF5C /* Cell.swift in Sources */,
 				4C61C6F41C13C03C00205047 /* Layout.swift in Sources */,
@@ -510,7 +514,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Source/Common/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.noondev.CellAnimations;
@@ -528,7 +532,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Source/Common/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.noondev.CellAnimations;

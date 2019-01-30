@@ -79,7 +79,10 @@ extension ViewController: UICollectionViewDataSource {
             for: indexPath
         ) as! ContentCell
 
-        cell.backgroundColor = colors[indexPath.item]
+//        cell.backgroundColor = colors[indexPath.item]
+        cell.backView.backgroundColor = colors[indexPath.item]
+        cell.triangle.backgroundColor = colors[indexPath.item]
+        cell.hideTheCornerView.backgroundColor = colors[indexPath.item]
         cell.label.text = "Cell \(indexPath.item)"
 
         return cell

@@ -13,6 +13,12 @@ class ContentCell: UICollectionViewCell {
     class var kind: String { return "ContentCell" }
 
     var label: UILabel!
+    lazy var backView: UIView = {
+        let view = UIView(frame: .zero)
+        return view
+    }()
+    var triangle = MessagePointerView()
+    var hideTheCornerView = UIView()
 
     // MARK: Initialization
 
@@ -26,11 +32,28 @@ class ContentCell: UICollectionViewCell {
 
             return label
         }()
-
-        contentView.addSubview(label)
-
+        contentView.addSubview(backView)
+        contentView.addSubview(triangle)
+        contentView.addSubview(hideTheCornerView)
+        backView.addSubview(label)
+        backView.layer.cornerRadius = 17
+        backView.snp.makeConstraints { make in
+            make.top.left.bottom.equalToSuperview()
+            make.right.equalToSuperview().offset(-7)
+        }
+        triangle.snp.makeConstraints { make in
+            make.right.bottom.equalToSuperview()
+            make.width.equalTo(7)
+            make.height.equalTo(9)
+        }
+        hideTheCornerView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.right.equalTo(triangle.snp.left)
+            make.height.equalTo(17)
+            make.width.equalTo(17)
+        }
         label.snp.makeConstraints { make in
-            make.center.equalTo(contentView)
+            make.center.equalTo(backView)
         }
     }
 
@@ -51,6 +74,35 @@ class ContentCell: UICollectionViewCell {
         layoutIfNeeded()
     }
 }
+
+extension UIView {
+    func roundCorners(_ corners: CACornerMask, radius: CGFloat) {
+        if #available(iOS 11, *) {
+            self.layer.cornerRadius = radius
+            self.layer.maskedCorners = corners
+        } else {
+            var cornerMask = UIRectCorner()
+            if(corners.contains(.layerMinXMinYCorner)){
+                cornerMask.insert(.topLeft)
+            }
+            if(corners.contains(.layerMaxXMinYCorner)){
+                cornerMask.insert(.topRight)
+            }
+            if(corners.contains(.layerMinXMaxYCorner)){
+                cornerMask.insert(.bottomLeft)
+            }
+            if(corners.contains(.layerMaxXMaxYCorner)){
+                cornerMask.insert(.bottomRight)
+            }
+            let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: cornerMask, cornerRadii: CGSize(width: radius, height: radius))
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            mask.fillColor = UIColor.red.cgColor
+            self.layer.mask = mask
+        }
+    }
+}
+
 
 // MARK: -
 
