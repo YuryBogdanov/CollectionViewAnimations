@@ -33,13 +33,12 @@ final class MessagePointerView: UIView {
     private func layoutMask() {
         let trianglePath = UIBezierPath()
         trianglePath.move(to: .zero)
-//        trianglePath.addLine(to: CGPoint(x: bounds.maxX - Constants.pointerWidth, y: bounds.maxY - Constants.pointerHeight))
-//        trianglePath.addArc(withCenter: CGPoint(x: bounds.maxY - Constants.radius,
-//                                                y: bounds.maxX - Constants.radius),
-//                            radius: Constants.radius,
-//                            startAngle: -CGFloat.pi / 6,
-//                            endAngle: CGFloat.pi / 2,
-//                            clockwise: true)
+        trianglePath.addLine(to: CGPoint(x: bounds.maxX - Constants.radius / 2, y: bounds.maxY - Constants.radius * 2))
+        trianglePath.addArc(withCenter: CGPoint(x: bounds.maxX - Constants.radius, y: bounds.maxY - Constants.radius),
+                    radius: Constants.radius,
+                    startAngle: -CGFloat.pi / 6,
+                    endAngle: CGFloat.pi / 2,
+                    clockwise: true)
         trianglePath.addLine(to: CGPoint(x: bounds.maxX, y: bounds.maxY))
         trianglePath.addLine(to: CGPoint(x: bounds.minX, y: bounds.maxY))
         trianglePath.close()

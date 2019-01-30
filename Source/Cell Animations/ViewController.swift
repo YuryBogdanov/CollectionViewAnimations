@@ -97,17 +97,22 @@ extension ViewController: UICollectionViewDelegate {
 
         let bounceEnabled = false
 
-        UIView.animate(
-            withDuration: 0.4,
-            delay: 0.0,
-            usingSpringWithDamping: bounceEnabled ? 0.5 : 1.0,
-            initialSpringVelocity: bounceEnabled ? 2.0 : 0.0,
-            options: UIView.AnimationOptions(),
-            animations: {
-                self.layout.invalidateLayout()
-                self.collectionView.layoutIfNeeded()
-            },
-            completion: nil
-        )
+//        UIView.animate(
+//            withDuration: 0.4,
+//            delay: 0.0,
+//            usingSpringWithDamping: bounceEnabled ? 0.5 : 1.0,
+//            initialSpringVelocity: bounceEnabled ? 2.0 : 0.0,
+//            options: UIView.AnimationOptions(),
+//            animations: {
+//                self.layout.invalidateLayout()
+//                self.collectionView.layoutIfNeeded()
+//            },
+//            completion: nil
+//        )
+        collectionView.performBatchUpdates({
+            collectionView.deleteItems(at: [IndexPath(item: 1, section: 0)])
+            collectionView.insertItems(at: [IndexPath(item: 1, section: 0)])
+        }, completion: { _ in
+        })
     }
 }
